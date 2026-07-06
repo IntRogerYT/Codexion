@@ -1,0 +1,41 @@
+name: CI
+
+on:
+  push:
+    branches: [ "dev", "pruebas" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Python (para norminette)
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Instalar norminette
+        run: pip install norminette
+
+      - name: Comprobar norma de 42
+        run: norminette src/ include/
+
+      - name: Instalar herramientas de C
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cppcheck
+
+      - name: Análisis estático con cppcheck
+        run: cppcheck --error-exitcode=1 --enable=warning,style --suppress=missingIncludeSystem .
+
+      - name: Compilar
+        run: make
+
+      - name: Ejecutar tests
+        run: |
+          if grep -q "^test:" Makefile; then make test; else echo "No hay target 'test', saltando"; fi
