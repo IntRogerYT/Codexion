@@ -1,21 +1,24 @@
-NAME = programa
+NAME = codexion
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror -pthread
 
-SRCS = src/main.c
-OBJS = $(SRCS:.c=.o)
+SRCS = main.c
+SRCDIR = src
+OBJDIR = objs
+OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) coders/main.h Makefile
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
-%.o: %.c
-	$(CC) $(CFLAGS) -I include -c $< -o $@
+$(OBJDIR)/%.o: $(SRCDIR)/%.c
+	@mkdir -p $(OBJDIR)
+	$(CC) $(CFLAGS) -I coders -c $< -o $@
 
 clean:
-	rm -f $(OBJS)
+	rm -rf $(OBJDIR)
 
 fclean: clean
 	rm -f $(NAME)
