@@ -3,26 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcamps-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rcamps-v <rcamps-v@student.42barcelona.co  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/14 12:33:15 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/14 12:33:15 by rcamps-v         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 12:54:16 by rcamps-v          #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2026/07/08 11:56:38 by rcamps-v         ###   ########.fr       */
-=======
-/*   Updated: 2026/07/14 12:31:14 by rcamps-v         ###   LAUSANNE.ch       */
->>>>>>> main
+/*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
+/*   Updated: 2026/07/14 14:07:51 by rcamps-v         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +18,7 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
+# include <stdbool.h>
 /********************************/
 /*           MACROS             */
 /********************************/
@@ -109,5 +94,11 @@ typedef struct s_data
 /********************************/
 /*          FUNCTIONS           */
 /********************************/
-int	main(int argc, char **argv);
+//========== main.c ==========
+int		main(int argc, char **argv);
+//======= parse_args.c =======
+char	**remove_first_arg(char **argv);
+void	parse_args(int argc, char **argv, t_data *data);
+//========== utils/ ==========
+int		ft_isnumber(const char *str);
 #endif
