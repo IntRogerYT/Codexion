@@ -23,7 +23,7 @@ jobs:
         run: pip install norminette
 
       - name: Comprobar norma de 42
-        run: norminette src/ include/
+        run: norminette src/ coders/
 
       - name: Instalar herramientas de C
         run: |
