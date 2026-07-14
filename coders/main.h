@@ -3,10 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   main.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
+/*   By: rcamps-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/07/14 12:33:15 by rcamps-v          #+#    #+#             */
+/*   Updated: 2026/07/14 12:33:15 by rcamps-v         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.h                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:54:16 by rcamps-v          #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2026/07/08 11:56:38 by rcamps-v         ###   ########.fr       */
+=======
+/*   Updated: 2026/07/14 12:31:14 by rcamps-v         ###   LAUSANNE.ch       */
+>>>>>>> main
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +45,67 @@
 /********************************/
 /*           STRUCTS            */
 /********************************/
+typedef enum e_scheduler
+{
+	FIFO,
+	EDF,
+}	t_scheduler;
 
+typedef struct s_request
+{
+	unsigned int	coder_id;
+	long			deadline;
+	unsigned int	arrival_order;
+}	t_request;
+
+typedef struct s_node
+{
+	t_request		req;
+	struct s_node	*next;
+}	t_node;
+
+typedef struct s_queue
+{
+	t_node	*head;
+	int		size;
+	int		(*cmp)(t_request, t_request);
+}	t_queue;
+
+typedef struct s_dongle
+{
+	bool			available;
+	unsigned int	last_release_ms;
+	t_queue			wait_queue;
+}	t_dongle;
+
+typedef struct s_coder
+{
+	unsigned int	id;
+	unsigned int	compiles_done;
+	unsigned int	last_compile_ms;
+	t_dongle		*left;
+	t_dongle		*right;
+	int				left_idx;
+	int				right_idx;
+	struct s_data	*data;
+}	t_coder;
+
+typedef struct s_data
+{
+	unsigned int	number_of_coders;
+	unsigned int	time_to_burnout;
+	unsigned int	time_to_compile;
+	unsigned int	time_to_debug;
+	unsigned int	time_to_refactor;
+	unsigned int	number_of_compiles_required;
+	unsigned int	dongle_cooldown;
+	t_scheduler		scheduler;
+	t_coder			*coders;
+	t_dongle		*dongles;
+	bool			running;
+	unsigned long	start_time;
+	unsigned long	request_counter;
+}	t_data;
 /********************************/
 /*          FUNCTIONS           */
 /********************************/
