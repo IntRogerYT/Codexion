@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/16 13:45:15 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/17 11:07:11 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ typedef struct s_data
 /********************************/
 //========== main.c ==========
 int		main(int argc, char **argv);
-//======= parse_args.c =======
+//========= parsing/ =========
 char	**remove_first_arg(char **argv);
 void	parse_args(int argc, char **argv, t_data *data);
 //========== utils/ ==========
