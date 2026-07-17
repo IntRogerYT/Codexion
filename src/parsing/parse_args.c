@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcamps-v <rcamps-v@student.42barcelona.co  +#+  +:+       +#+        */
+/*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:49:06 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/14 14:18:26 by rcamps-v         ###   LAUSANNE.ch       */
+/*   Updated: 2026/07/16 13:49:50 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,13 +53,16 @@ void	parse_args(int argc, char **argv, t_data *data)
 	}
 	args = remove_first_arg(argv);
 	i = 0;
-	while (i < 8)
+	while (i < 7)
 	{
 		if (!ft_isnumber(args[i]))
 		{
 			printf("All first 7 arguments must be positive integers.");
 			exit(1);
 		}
+		i++;
 	}
-	printf("%i\n", data->number_of_coders);
+	if (!ft_strisalpha(args[7]))
+		error("The last argument must be 'edf' or 'fifo'.");
+	data->number_of_coders = atoi(args[0]);
 }

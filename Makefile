@@ -1,10 +1,15 @@
 NAME = codexion
 
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -pthread
+CFLAGS = -Wall -Wextra -Werror -pthread -g
 
-SRCS = main.c
+SRCS = main.c $(PARSE) $(UTILS)
 SRCDIR = src
+PARSE = parsing/parse_args.c
+UTILS = /utils/ft_isnumber.c \
+		/utils/ft_strisalpha.c \
+		/utils/errors.c
+
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
 
@@ -14,7 +19,7 @@ $(NAME): $(OBJS) coders/main.h Makefile
 	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c
-	@mkdir -p $(OBJDIR)
+	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) -I coders -c $< -o $@
 
 clean:
