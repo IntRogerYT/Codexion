@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:49:06 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/16 13:49:50 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/17 10:37:39 by rcamps-v         ###   LAUSANNE.ch       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,23 @@ char	**remove_first_arg(char **argv)
 	return (args);
 }
 
+void	convert_arg_types(char **args, t_data *data)
+{
+	data->number_of_coders = atoi(args[0]);
+	data->time_to_burnout = atoi(args[1]);
+	data->time_to_compile = atoi(args[2]);
+	data->time_to_debug = atoi(args[3]);
+	data->time_to_refactor = atoi(args[4]);
+	data->number_of_compiles_required = atoi(args[5]);
+	data->dongle_cooldown = atoi(args[6]);
+	if (args[7] == "edf")
+		data->scheduler = EDF;
+	else if (args[7] == "fifo")
+		data->scheduler = FIFO;
+	else
+		free_error(args, data, "The scheduler must be 'edf' or 'fifo'.");
+}
+
 void	parse_args(int argc, char **argv, t_data *data)
 {
 	char	**args;
@@ -64,5 +81,5 @@ void	parse_args(int argc, char **argv, t_data *data)
 	}
 	if (!ft_strisalpha(args[7]))
 		error("The last argument must be 'edf' or 'fifo'.");
-	data->number_of_coders = atoi(args[0]);
+	convert_arg_types(args, data);
 }
