@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/17 11:07:11 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/20 11:27:12 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,4 +103,6 @@ void	parse_args(int argc, char **argv, t_data *data);
 int		ft_isnumber(const char *str);
 int		ft_strisalpha(char *s);
 void	error(char *message);
+void	free_error(char **args, t_data *data, char *message);
+void	free_matrix(char **matrix);
 #endif

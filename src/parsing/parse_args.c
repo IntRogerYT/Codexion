@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:49:06 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/17 10:37:39 by rcamps-v         ###   LAUSANNE.ch       */
+/*   Updated: 2026/07/20 11:36:11 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,9 @@ char	**remove_first_arg(char **argv)
 	char	**args;
 	int		i;
 
-	args = (char **)malloc(8 * sizeof(char *) + 1);
+	args = (char **)malloc(9 * sizeof(char *) + 1);
 	if (args == NULL)
 		return (NULL);
-	i = 0;
-	while (i <= 7)
-	{
-		args[i] = (char *)malloc(strlen(argv[i]) * sizeof(char) + 1);
-		if (!args[i])
-			return (NULL);
-		i++;
-	}
 	i = 0;
 	while (i <= 7)
 	{
@@ -47,9 +39,9 @@ void	convert_arg_types(char **args, t_data *data)
 	data->time_to_refactor = atoi(args[4]);
 	data->number_of_compiles_required = atoi(args[5]);
 	data->dongle_cooldown = atoi(args[6]);
-	if (args[7] == "edf")
+	if (!strcmp(args[7], "edf"))
 		data->scheduler = EDF;
-	else if (args[7] == "fifo")
+	else if (!strcmp(args[7], "fifo"))
 		data->scheduler = FIFO;
 	else
 		free_error(args, data, "The scheduler must be 'edf' or 'fifo'.");
@@ -72,14 +64,14 @@ void	parse_args(int argc, char **argv, t_data *data)
 	i = 0;
 	while (i < 7)
 	{
-		if (!ft_isnumber(args[i]))
+		if (!ft_isnumber(args[i++]))
 		{
 			printf("All first 7 arguments must be positive integers.");
 			exit(1);
 		}
-		i++;
 	}
 	if (!ft_strisalpha(args[7]))
-		error("The last argument must be 'edf' or 'fifo'.");
+		free_error(args, data, "The last argument must be 'edf' or 'fifo'.");
 	convert_arg_types(args, data);
+	free(args);
 }
