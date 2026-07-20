@@ -3,17 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isnumber.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rcamps-v <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 14:02:55 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/14 14:06:03 by rcamps-v         ###   LAUSANNE.ch       */
+/*   Updated: 2026/07/20 14:22:08 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../coders/main.h"
 
 int	ft_isnumber(const char *str)
 {
 	int	i;
 
+	if (!strcmp(str, ""))
+		return (0);
 	i = 0;
 	while (str[i])
 	{

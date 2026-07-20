@@ -6,18 +6,18 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:49:06 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 11:36:11 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:14:08 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../coders/main.h"
 
-char	**remove_first_arg(char **argv)
+static char	**remove_first_arg(char **argv)
 {
 	char	**args;
 	int		i;
 
-	args = (char **)malloc(9 * sizeof(char *) + 1);
+	args = (char **)malloc(9 * sizeof(char *));
 	if (args == NULL)
 		return (NULL);
 	i = 0;
@@ -30,7 +30,7 @@ char	**remove_first_arg(char **argv)
 	return (args);
 }
 
-void	convert_arg_types(char **args, t_data *data)
+static void	convert_arg_types(char **args, t_data *data)
 {
 	data->number_of_coders = atoi(args[0]);
 	data->time_to_burnout = atoi(args[1]);
@@ -50,7 +50,6 @@ void	convert_arg_types(char **args, t_data *data)
 void	parse_args(int argc, char **argv, t_data *data)
 {
 	char	**args;
-	int		i;
 
 	if (argc != 9)
 	{
@@ -61,17 +60,7 @@ void	parse_args(int argc, char **argv, t_data *data)
 		exit(1);
 	}
 	args = remove_first_arg(argv);
-	i = 0;
-	while (i < 7)
-	{
-		if (!ft_isnumber(args[i++]))
-		{
-			printf("All first 7 arguments must be positive integers.");
-			exit(1);
-		}
-	}
-	if (!ft_strisalpha(args[7]))
-		free_error(args, data, "The last argument must be 'edf' or 'fifo'.");
+	validate_args(args, data);
 	convert_arg_types(args, data);
 	free(args);
 }

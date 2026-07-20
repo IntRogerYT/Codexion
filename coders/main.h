@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 11:27:12 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/20 14:19:13 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # include <stdlib.h>
 # include <string.h>
 # include <stdbool.h>
+# include <limits.h>
 /********************************/
 /*           MACROS             */
 /********************************/
@@ -96,9 +97,9 @@ typedef struct s_data
 /********************************/
 //========== main.c ==========
 int		main(int argc, char **argv);
-//========= parsing/ =========
-char	**remove_first_arg(char **argv);
+//========= parse_and_validation/ =========
 void	parse_args(int argc, char **argv, t_data *data);
+void	validate_args(char **args, t_data *data);
 //========== utils/ ==========
 int		ft_isnumber(const char *str);
 int		ft_strisalpha(char *s);
