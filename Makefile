@@ -3,13 +3,16 @@ NAME = codexion
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -g
 
-SRCS = main.c $(PARSE) $(UTILS)
+SRCS = main.c $(PARSE) $(UTILS) $(INIT_DATA) $(LOGGING)
 SRCDIR = src
 PARSE = parse_and_validation/parse_args.c \
 		parse_and_validation/validate_args.c
-UTILS = /utils/ft_isnumber.c \
-		/utils/ft_strisalpha.c \
-		/utils/errors.c
+UTILS = utils/ft_isnumber.c \
+		utils/ft_strisalpha.c \
+		utils/errors.c
+INIT_DATA = init_data/init.c \
+			init_data/init_helpers.c
+LOGGING = logging/log.c
 
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 14:19:13 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/24 13:06:47 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,8 @@
 # include <string.h>
 # include <stdbool.h>
 # include <limits.h>
+# include <pthread.h>
+# include <sys/time.h>
 /********************************/
 /*           MACROS             */
 /********************************/
@@ -59,9 +61,13 @@ typedef struct s_queue
 
 typedef struct s_dongle
 {
+	unsigned int	id;
 	bool			available;
 	unsigned int	last_release_ms;
 	t_queue			wait_queue;
+	pthread_mutex_t	lock;
+	pthread_cond_t	cond;
+	bool			ready;
 }	t_dongle;
 
 typedef struct s_coder
@@ -91,6 +97,10 @@ typedef struct s_data
 	bool			running;
 	unsigned long	start_time;
 	unsigned long	request_counter;
+	pthread_mutex_t	log_lock;
+	bool			log_lock_ready;
+	pthread_t		*threads;
+	pthread_t		monitor;
 }	t_data;
 /********************************/
 /*          FUNCTIONS           */
@@ -100,10 +110,16 @@ int		main(int argc, char **argv);
 //========= parse_and_validation/ =========
 void	parse_args(int argc, char **argv, t_data *data);
 void	validate_args(char **args, t_data *data);
+//========== init_data/ ==========
+void	init_data(t_data *data);
+int		init_dongle(t_dongle *dongle, unsigned int i, t_data *data);
+void	init_coder(t_coder *coder, unsigned int i, t_data *data);
+void	assign_dongles(t_coder *coder, unsigned int i, t_data *data);
 //========== utils/ ==========
 int		ft_isnumber(const char *str);
 int		ft_strisalpha(char *s);
 void	error(char *message);
 void	free_error(char **args, t_data *data, char *message);
 void	free_matrix(char **matrix);
+void	cleanup(t_data *data, char *message);
 #endif

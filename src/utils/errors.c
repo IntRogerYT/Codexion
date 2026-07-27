@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 13:24:08 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 11:34:38 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/24 12:47:21 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,8 @@ void	error(char *message)
 void	free_error(char **args, t_data *data, char *message)
 {
 	if (args)
-	{
 		free(args);
-	}
-	if (data)
-		free(data);
-	if (message)
-		printf("%s\n", message);
+	cleanup(data, message);
 	exit(1);
 }
 
@@ -39,4 +34,38 @@ void	free_matrix(char **matrix)
 	while (matrix[i])
 		free(matrix[i++]);
 	free(matrix);
+}
+
+static void	destroy_dongles(t_data *data)
+{
+	unsigned int	i;
+
+	if (!data->dongles)
+		return ;
+	i = 0;
+	while (i < data->number_of_coders)
+	{
+		if (data->dongles[i].ready)
+		{
+			pthread_mutex_destroy(&data->dongles[i].lock);
+			pthread_cond_destroy(&data->dongles[i].cond);
+		}
+		i++;
+	}
+	free(data->dongles);
+}
+
+void	cleanup(t_data *data, char *message)
+{
+	if (data)
+	{
+		destroy_dongles(data);
+		if (data->log_lock_ready)
+			pthread_mutex_destroy(&data->log_lock);
+		if (data->coders)
+			free(data->coders);
+		free(data);
+	}
+	if (message)
+		printf("%s\n", message);
 }
