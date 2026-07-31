@@ -3,7 +3,7 @@ NAME = codexion
 CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -g
 
-SRCS = main.c $(PARSE) $(UTILS) $(INIT_DATA) $(LOGGING)
+SRCS = main.c $(PARSE) $(UTILS) $(INIT_DATA) $(LOGGING) $(SIMUL)
 SRCDIR = src
 PARSE = parse_and_validation/parse_args.c \
 		parse_and_validation/validate_args.c
@@ -13,6 +13,7 @@ UTILS = utils/ft_isnumber.c \
 INIT_DATA = init_data/init.c \
 			init_data/init_helpers.c
 LOGGING = logging/log.c
+SIMUL = simulation/coder.c
 
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

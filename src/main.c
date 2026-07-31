@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:54:44 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/24 13:07:42 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/27 11:25:52 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 int	main(int argc, char **argv)
 {
-	struct timeval	tv;
-	t_data			*parsed_data;
+	t_data	*parsed_data;
 
-	parsed_data = calloc(1, sizeof(t_data));
+	parsed_data = malloc(sizeof(t_data));
 	if (!parsed_data)
 		error("Error! Memory cannot be allocated. There is not enough space.");
+	memset(parsed_data, 0, sizeof(t_data));
 	parse_args(argc, argv, parsed_data);
 	printf("./codexion %i %i %i %i %i %i %i %i\n",
 		parsed_data->number_of_coders,
@@ -30,9 +30,9 @@ int	main(int argc, char **argv)
 		parsed_data->number_of_compiles_required,
 		parsed_data->dongle_cooldown,
 		parsed_data->scheduler);
+	parsed_data->start_time = current_ms();
 	init_data(parsed_data);
 	printf("data initialized correctly!\n");
-	parsed_data->start_time = gettimeofday()
 	cleanup(parsed_data, NULL);
 	printf("all correctly\n");
 	return (0);

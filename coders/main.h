@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/24 13:06:47 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/07/29 11:10:59 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 /********************************/
 /*        EXTERN LIBS           */
 /********************************/
+# include <unistd.h>
 # include <stdio.h>
 # include <stdlib.h>
 # include <string.h>
@@ -33,6 +34,15 @@
 /********************************/
 /*           STRUCTS            */
 /********************************/
+typedef enum e_state
+{
+	TAKEN_DONGLE,
+	COMPILING,
+	DEBUGGING,
+	REFACTORING,
+	BURNED_OUT
+}	t_state;
+
 typedef enum e_scheduler
 {
 	FIFO,
@@ -74,7 +84,7 @@ typedef struct s_coder
 {
 	unsigned int	id;
 	unsigned int	compiles_done;
-	unsigned int	last_compile_ms;
+	unsigned long	last_compile_ms;
 	t_dongle		*left;
 	t_dongle		*right;
 	int				left_idx;
@@ -106,20 +116,26 @@ typedef struct s_data
 /*          FUNCTIONS           */
 /********************************/
 //========== main.c ==========
-int		main(int argc, char **argv);
+int				main(int argc, char **argv);
 //========= parse_and_validation/ =========
-void	parse_args(int argc, char **argv, t_data *data);
-void	validate_args(char **args, t_data *data);
+void			parse_args(int argc, char **argv, t_data *data);
+void			validate_args(char **args, t_data *data);
 //========== init_data/ ==========
-void	init_data(t_data *data);
-int		init_dongle(t_dongle *dongle, unsigned int i, t_data *data);
-void	init_coder(t_coder *coder, unsigned int i, t_data *data);
-void	assign_dongles(t_coder *coder, unsigned int i, t_data *data);
+void			init_data(t_data *data);
+int				init_dongle(t_dongle *dongle, unsigned int i, t_data *data);
+void			init_coder(t_coder *coder, unsigned int i, t_data *data);
+void			assign_dongles(t_coder *coder, unsigned int i, t_data *data);
+//========== logging/ ==========
+unsigned long	current_ms(void);
+unsigned long	get_elapsed_ms(t_data *data);
+void			log_status(t_data *data, unsigned int coder_id, t_state state);
+//========== simulation/ ==========
+void			*routine(void *arg);
 //========== utils/ ==========
-int		ft_isnumber(const char *str);
-int		ft_strisalpha(char *s);
-void	error(char *message);
-void	free_error(char **args, t_data *data, char *message);
-void	free_matrix(char **matrix);
-void	cleanup(t_data *data, char *message);
+int				ft_isnumber(const char *str);
+int				ft_strisalpha(char *s);
+void			error(char *message);
+void			free_error(char **args, t_data *data, char *message);
+void			free_matrix(char **matrix);
+void			cleanup(t_data *data, char *message);
 #endif
