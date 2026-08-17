@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/29 11:10:59 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/13 09:41:46 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,6 +131,8 @@ unsigned long	get_elapsed_ms(t_data *data);
 void			log_status(t_data *data, unsigned int coder_id, t_state state);
 //========== simulation/ ==========
 void			*routine(void *arg);
+int				acquire_dongle(t_dongle *dongle, t_coder *coder);
+void			release_dongle(t_dongle *dongle);
 //========== utils/ ==========
 int				ft_isnumber(const char *str);
 int				ft_strisalpha(char *s);

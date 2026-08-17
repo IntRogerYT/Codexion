@@ -13,7 +13,8 @@ UTILS = utils/ft_isnumber.c \
 INIT_DATA = init_data/init.c \
 			init_data/init_helpers.c
 LOGGING = logging/log.c
-SIMUL = simulation/coder.c
+SIMUL = simulation/coder.c \
+		simulation/dongles.c
 
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

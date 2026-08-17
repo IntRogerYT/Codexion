@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 11:52:35 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/29 10:44:00 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/13 10:30:40 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@ void	*routine(void *arg)
 	t_coder	*coder;
 
 	coder = (t_coder *)arg;
-	while (coder->compiles_done < coder->data->number_of_compiles_required)
+	while (coder->compiles_done < coder->data->number_of_compiles_required
+		&& coder->data->running)
 	{
-		log_status(coder->data, coder->id, TAKEN_DONGLE);
-		log_status(coder->data, coder->id, TAKEN_DONGLE);
+		if (acquire_both_dongles(coder) != 0)
+			return (NULL);
 		log_status(coder->data, coder->id, COMPILING);
+		coder->last_compile_ms = current_ms();
 		sleep_ms(coder->data->time_to_compile, coder);
 		coder->compiles_done++;
-		coder->last_compile_ms = current_ms();
+		release_both_dongles(coder);
 		log_status(coder->data, coder->id, DEBUGGING);
 		sleep_ms(coder->data->time_to_debug, coder);
 		log_status(coder->data, coder->id, REFACTORING);
