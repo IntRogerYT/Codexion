@@ -6,11 +6,11 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:49:06 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 14:14:08 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:39:03 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../coders/main.h"
+#include "../../main.h"
 
 static char	**remove_first_arg(char **argv)
 {

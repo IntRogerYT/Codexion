@@ -6,9 +6,11 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 13:15:27 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 12:44:22 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:39:28 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "../../main.h"
 
 int	ft_strisalpha(char *s)
 {

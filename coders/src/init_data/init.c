@@ -6,11 +6,11 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 11:58:03 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/27 10:32:12 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:39:03 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../coders/main.h"
+#include "../../main.h"
 
 static void	alloc_arrays(t_data *data)
 {

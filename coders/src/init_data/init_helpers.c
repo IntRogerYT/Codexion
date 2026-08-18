@@ -6,11 +6,11 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 12:39:01 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/24 12:40:07 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:37:39 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../coders/main.h"
+#include "../../main.h"
 
 int	init_dongle(t_dongle *dongle, unsigned int i, t_data *data)
 {

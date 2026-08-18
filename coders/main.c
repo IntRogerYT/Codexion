@@ -6,15 +6,16 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 12:54:44 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/13 12:41:22 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:40:02 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../coders/main.h"
+#include "./main.h"
 
 int	main(int argc, char **argv)
 {
 	t_data	*parsed_data;
+
 	parsed_data = malloc(sizeof(t_data));
 	if (!parsed_data)
 		error("Error! Memory cannot be allocated. There is not enough space.");

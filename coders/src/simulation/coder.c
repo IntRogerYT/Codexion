@@ -6,11 +6,11 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/27 11:52:35 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/13 10:30:40 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:39:03 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../coders/main.h"
+#include "../../main.h"
 
 static void	sleep_ms(unsigned long time, t_coder *coder)
 {
