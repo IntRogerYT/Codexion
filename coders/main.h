@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/13 09:41:46 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 09:49:49 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,6 +133,8 @@ void			log_status(t_data *data, unsigned int coder_id, t_state state);
 void			*routine(void *arg);
 int				acquire_dongle(t_dongle *dongle, t_coder *coder);
 void			release_dongle(t_dongle *dongle);
+int				acquire_both_dongles(t_coder *coder);
+void			release_both_dongles(t_coder *coder);
 //========== utils/ ==========
 int				ft_isnumber(const char *str);
 int				ft_strisalpha(char *s);
