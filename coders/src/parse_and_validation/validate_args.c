@@ -19,11 +19,10 @@ void	validate_args(char **args, t_data *data)
 	i = 0;
 	while (i < 7)
 	{
-		if (!ft_isnumber(args[i++]))
-		{
-			printf("All first 7 arguments must be positive integers.");
-			exit(1);
-		}
+		if (!ft_isnumber(args[i]))
+			free_error(args, data,
+				"All first 7 arguments must be positive integers.");
+		i++;
 	}
 	if (!ft_strisalpha(args[7]))
 		free_error(args, data, "The last argument must be 'edf' or 'fifo'.");

@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/22 11:58:03 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/18 09:39:03 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 11:44:15 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,13 @@ static void	alloc_arrays(t_data *data)
 		cleanup(data, "Error! Memory cannot be allocated.");
 		exit(1);
 	}
+	data->threads = malloc(data->number_of_coders * sizeof(pthread_t));
+	if (!data->threads)
+	{
+		cleanup(data, "Error! Memory cannot be allocated.");
+		exit(1);
+	}
+	memset(data->threads, 0, data->number_of_coders * sizeof(pthread_t));
 	memset(data->coders, 0, data->number_of_coders * sizeof(t_coder));
 	memset(data->dongles, 0, data->number_of_coders * sizeof(t_dongle));
 }

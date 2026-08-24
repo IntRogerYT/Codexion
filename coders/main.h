@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/18 09:49:49 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/22 13:14:26 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,6 +135,13 @@ int				acquire_dongle(t_dongle *dongle, t_coder *coder);
 void			release_dongle(t_dongle *dongle);
 int				acquire_both_dongles(t_coder *coder);
 void			release_both_dongles(t_coder *coder);
+void			run_simulation(t_data *data);
+void			*monitor_routine(void *arg);
+void			coders_loop(t_data *data, unsigned int *finished_coders);
+int				cmp_fifo(t_request a, t_request b);
+int				cmp_edf(t_request a, t_request b);
+void			queue_push(t_queue *queue, t_request req);
+t_request		queue_pop(t_queue *queue);
 //========== utils/ ==========
 int				ft_isnumber(const char *str);
 int				ft_strisalpha(char *s);

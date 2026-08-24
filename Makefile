@@ -14,7 +14,9 @@ INIT_DATA = src/init_data/init.c \
 			src/init_data/init_helpers.c
 LOGGING = src/logging/log.c
 SIMUL = src/simulation/coder.c \
-		src/simulation/dongles.c
+		src/simulation/dongles.c \
+		src/simulation/run.c \
+		src/simulation/heap.c
 
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)
