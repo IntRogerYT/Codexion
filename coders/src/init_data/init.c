@@ -66,21 +66,28 @@ static void	init_coders_loop(t_data *data)
 	}
 }
 
-static void	init_log_lock(t_data *data)
+static void	init_locks(t_data *data)
 {
 	data->log_lock_ready = false;
+	data->sim_lock_ready = false;
 	if (pthread_mutex_init(&data->log_lock, NULL) != 0)
 	{
 		cleanup(data, "Error! Could not initialize log mutex.");
 		exit(1);
 	}
 	data->log_lock_ready = true;
+	if (pthread_mutex_init(&data->sim_lock, NULL) != 0)
+	{
+		cleanup(data, "Error! Could not initialize sim mutex.");
+		exit(1);
+	}
+	data->sim_lock_ready = true;
 }
 
 void	init_data(t_data *data)
 {
 	alloc_arrays(data);
-	init_log_lock(data);
+	init_locks(data);
 	init_dongles_loop(data);
 	init_coders_loop(data);
 }

@@ -62,6 +62,8 @@ void	cleanup(t_data *data, char *message)
 		destroy_dongles(data);
 		if (data->log_lock_ready)
 			pthread_mutex_destroy(&data->log_lock);
+		if (data->sim_lock_ready)
+			pthread_mutex_destroy(&data->sim_lock);
 		if (data->coders)
 			free(data->coders);
 		if (data->threads)

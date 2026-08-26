@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/24 12:39:01 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/18 09:37:39 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/26 12:08:42 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,14 @@ int	init_dongle(t_dongle *dongle, unsigned int i, t_data *data)
 	dongle->last_release_ms = 0;
 	dongle->wait_queue.head = NULL;
 	dongle->wait_queue.size = 0;
+	if (data->scheduler == FIFO)
+	{
+		dongle->wait_queue.cmp = cmp_fifo;
+	}
+	else
+	{
+		dongle->wait_queue.cmp = cmp_edf;
+	}
 	dongle->ready = false;
 	if (pthread_mutex_init(&dongle->lock, NULL) != 0)
 		return (1);

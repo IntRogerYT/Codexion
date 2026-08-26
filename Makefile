@@ -15,6 +15,9 @@ INIT_DATA = src/init_data/init.c \
 LOGGING = src/logging/log.c
 SIMUL = src/simulation/coder.c \
 		src/simulation/dongles.c \
+		src/simulation/dongles_more.c \
+		src/simulation/state.c \
+		src/simulation/state2.c \
 		src/simulation/run.c \
 		src/simulation/heap.c
 
