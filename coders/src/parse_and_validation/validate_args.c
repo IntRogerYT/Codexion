@@ -28,4 +28,6 @@ void	validate_args(char **args, t_data *data)
 		free_error(args, data, "The last argument must be 'edf' or 'fifo'.");
 	if (atoi(args[0]) < 1)
 		free_error(args, data, "The number of coders must be more than 0");
+	if (atoi(args[0]) > 200)
+		free_error(args, data, "The number of coders cannot be more than 200");
 }
