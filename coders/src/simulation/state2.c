@@ -1,29 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_isnumber.c                                      :+:      :+:    :+:   */
+/*   state2.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/07/14 14:02:55 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/20 14:22:08 by rcamps-v         ###   ########.fr       */
+/*   Created: 2026/08/26 13:02:00 by rcamps-v          #+#    #+#             */
+/*   Updated: 2026/08/26 13:02:00 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../coders/main.h"
+#include "../../main.h"
 
-int	ft_isnumber(const char *str)
+void	inc_compiles_done(t_coder *coder)
 {
-	int	i;
-
-	if (!strcmp(str, ""))
-		return (0);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] < '0' || str[i] > '9')
-			return (0);
-		i++;
-	}
-	return (1);
+	pthread_mutex_lock(&coder->data->sim_lock);
+	coder->compiles_done++;
+	pthread_mutex_unlock(&coder->data->sim_lock);
 }

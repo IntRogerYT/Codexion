@@ -6,11 +6,11 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/16 13:24:08 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/07/24 12:47:21 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/18 15:10:36 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../coders/main.h"
+#include "../../main.h"
 
 void	error(char *message)
 {
@@ -62,8 +62,12 @@ void	cleanup(t_data *data, char *message)
 		destroy_dongles(data);
 		if (data->log_lock_ready)
 			pthread_mutex_destroy(&data->log_lock);
+		if (data->sim_lock_ready)
+			pthread_mutex_destroy(&data->sim_lock);
 		if (data->coders)
 			free(data->coders);
+		if (data->threads)
+			free(data->threads);
 		free(data);
 	}
 	if (message)

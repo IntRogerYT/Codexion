@@ -4,17 +4,22 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror -pthread -g
 
 SRCS = main.c $(PARSE) $(UTILS) $(INIT_DATA) $(LOGGING) $(SIMUL)
-SRCDIR = src
-PARSE = parse_and_validation/parse_args.c \
-		parse_and_validation/validate_args.c
-UTILS = utils/ft_isnumber.c \
-		utils/ft_strisalpha.c \
-		utils/errors.c
-INIT_DATA = init_data/init.c \
-			init_data/init_helpers.c
-LOGGING = logging/log.c
-SIMUL = simulation/coder.c \
-		simulation/dongles.c
+SRCDIR = coders
+PARSE = src/parse_and_validation/parse_args.c \
+		src/parse_and_validation/validate_args.c
+UTILS = src/utils/ft_isnumber.c \
+		src/utils/ft_strisalpha.c \
+		src/utils/errors.c
+INIT_DATA = src/init_data/init.c \
+			src/init_data/init_helpers.c
+LOGGING = src/logging/log.c
+SIMUL = src/simulation/coder.c \
+		src/simulation/dongles.c \
+		src/simulation/dongles_more.c \
+		src/simulation/state.c \
+		src/simulation/state2.c \
+		src/simulation/run.c \
+		src/simulation/heap.c
 
 OBJDIR = objs
 OBJS = $(SRCS:%.c=$(OBJDIR)/%.o)

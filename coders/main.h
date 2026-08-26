@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/13 09:41:46 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/26 11:46:14 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ typedef struct s_dongle
 {
 	unsigned int	id;
 	bool			available;
-	unsigned int	last_release_ms;
+	unsigned long	last_release_ms;
 	t_queue			wait_queue;
 	pthread_mutex_t	lock;
 	pthread_cond_t	cond;
@@ -109,6 +109,8 @@ typedef struct s_data
 	unsigned long	request_counter;
 	pthread_mutex_t	log_lock;
 	bool			log_lock_ready;
+	pthread_mutex_t	sim_lock;
+	bool			sim_lock_ready;
 	pthread_t		*threads;
 	pthread_t		monitor;
 }	t_data;
@@ -131,8 +133,23 @@ unsigned long	get_elapsed_ms(t_data *data);
 void			log_status(t_data *data, unsigned int coder_id, t_state state);
 //========== simulation/ ==========
 void			*routine(void *arg);
+bool			get_running(t_data *data);
+void			set_running(t_data *data, bool value);
+unsigned long	get_last_compile(t_coder *coder);
+void			set_last_compile(t_coder *coder, unsigned long value);
+unsigned int	get_compiles_done(t_coder *coder);
+void			inc_compiles_done(t_coder *coder);
 int				acquire_dongle(t_dongle *dongle, t_coder *coder);
 void			release_dongle(t_dongle *dongle);
+int				acquire_both_dongles(t_coder *coder);
+void			release_both_dongles(t_coder *coder);
+void			run_simulation(t_data *data);
+void			*monitor_routine(void *arg);
+void			coders_loop(t_data *data, unsigned int *finished_coders);
+int				cmp_fifo(t_request a, t_request b);
+int				cmp_edf(t_request a, t_request b);
+void			queue_push(t_queue *queue, t_request req);
+t_request		queue_pop(t_queue *queue);
 //========== utils/ ==========
 int				ft_isnumber(const char *str);
 int				ft_strisalpha(char *s);
