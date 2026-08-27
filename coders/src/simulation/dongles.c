@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 10:54:54 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/27 11:10:08 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:20:53 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ int	acquire_dongle(t_dongle *dongle, t_coder *coder)
 	struct timespec	deadline;
 
 	enqueue_request(dongle, coder);
+	pthread_mutex_lock(&dongle->lock);
 	while (get_running(coder->data))
 	{
 		if (can_acquire(dongle, coder))
