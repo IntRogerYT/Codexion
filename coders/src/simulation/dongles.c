@@ -6,13 +6,13 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/29 10:54:54 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/26 12:08:23 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:10:08 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../main.h"
 
-static struct timespec	get_timespec_after_time(unsigned long time)
+struct timespec	get_future_timespec(unsigned long time)
 {
 	struct timespec	final_time;
 	unsigned long	abstime;
@@ -23,7 +23,7 @@ static struct timespec	get_timespec_after_time(unsigned long time)
 	return (final_time);
 }
 
-static void	enqueue_request(t_dongle *dongle, t_coder *coder)
+void	enqueue_request(t_dongle *dongle, t_coder *coder)
 {
 	t_request	req;
 
@@ -34,9 +34,10 @@ static void	enqueue_request(t_dongle *dongle, t_coder *coder)
 	pthread_mutex_unlock(&coder->data->log_lock);
 	pthread_mutex_lock(&dongle->lock);
 	queue_push(&dongle->wait_queue, req);
+	pthread_mutex_unlock(&dongle->lock);
 }
 
-static int	can_acquire(t_dongle *dongle, t_coder *coder)
+int	can_acquire(t_dongle *dongle, t_coder *coder)
 {
 	if (!dongle->available)
 		return (0);
@@ -58,7 +59,7 @@ int	acquire_dongle(t_dongle *dongle, t_coder *coder)
 	{
 		if (can_acquire(dongle, coder))
 			break ;
-		deadline = get_timespec_after_time(10);
+		deadline = get_future_timespec(10);
 		pthread_cond_timedwait(&dongle->cond, &dongle->lock, &deadline);
 	}
 	if (!get_running(coder->data))
@@ -71,4 +72,13 @@ int	acquire_dongle(t_dongle *dongle, t_coder *coder)
 	pthread_mutex_unlock(&dongle->lock);
 	log_status(coder->data, coder->id, TAKEN_DONGLE);
 	return (0);
+}
+
+void	release_dongle(t_dongle *dongle)
+{
+	pthread_mutex_lock(&dongle->lock);
+	dongle->available = true;
+	dongle->last_release_ms = current_ms();
+	pthread_cond_broadcast(&dongle->cond);
+	pthread_mutex_unlock(&dongle->lock);
 }

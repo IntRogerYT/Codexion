@@ -30,7 +30,6 @@ static int	compile_debug_refactor(t_coder *coder)
 	log_status(coder->data, coder->id, COMPILING);
 	set_last_compile(coder, current_ms());
 	sleep_ms(coder->data->time_to_compile, coder);
-	inc_compiles_done(coder);
 	release_both_dongles(coder);
 	if (!get_running(coder->data))
 		return (0);
@@ -40,6 +39,7 @@ static int	compile_debug_refactor(t_coder *coder)
 		return (0);
 	log_status(coder->data, coder->id, REFACTORING);
 	sleep_ms(coder->data->time_to_refactor, coder);
+	inc_compiles_done(coder);
 	return (1);
 }
 

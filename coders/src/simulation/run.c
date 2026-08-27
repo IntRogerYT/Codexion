@@ -63,16 +63,19 @@ void	coders_loop(t_data *data, unsigned int *finished_coders)
 	i = 0;
 	while (i < data->number_of_coders)
 	{
-		if (current_ms() - get_last_compile(&data->coders[i])
+		if (data->number_of_compiles_required > 0
+			&& get_compiles_done(&data->coders[i])
+			>= data->number_of_compiles_required)
+		{
+			(*finished_coders)++;
+		}
+		else if (current_ms() - get_last_compile(&data->coders[i])
 			>= data->time_to_burnout)
 		{
-			log_status(data, i, BURNED_OUT);
+			log_status(data, data->coders[i].id, BURNED_OUT);
 			set_running(data, false);
 			break ;
 		}
-		if (get_compiles_done(&data->coders[i])
-			>= data->number_of_compiles_required)
-			(*finished_coders)++;
 		i++;
 	}
 }

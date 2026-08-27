@@ -42,7 +42,7 @@ int	init_dongle(t_dongle *dongle, unsigned int i, t_data *data)
 
 void	init_coder(t_coder *coder, unsigned int i, t_data *data)
 {
-	coder->id = i;
+	coder->id = i + 1;
 	coder->compiles_done = 0;
 	coder->data = data;
 	coder->last_compile_ms = data->start_time;

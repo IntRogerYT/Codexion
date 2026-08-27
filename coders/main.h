@@ -6,7 +6,7 @@
 /*   By: rcamps-v <rcamps-v@student.42barcelona.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/07/14 13:40:10 by rcamps-v          #+#    #+#             */
-/*   Updated: 2026/08/26 11:46:14 by rcamps-v         ###   ########.fr       */
+/*   Updated: 2026/08/27 11:09:40 by rcamps-v         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,9 @@ int				cmp_fifo(t_request a, t_request b);
 int				cmp_edf(t_request a, t_request b);
 void			queue_push(t_queue *queue, t_request req);
 t_request		queue_pop(t_queue *queue);
+struct timespec	get_future_timespec(unsigned long time);
+void			enqueue_request(t_dongle *dongle, t_coder *coder);
+int				can_acquire(t_dongle *dongle, t_coder *coder);
 //========== utils/ ==========
 int				ft_isnumber(const char *str);
 int				ft_strisalpha(char *s);
